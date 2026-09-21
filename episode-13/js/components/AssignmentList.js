@@ -1,23 +1,36 @@
 import Assignment from "./Assignment.js";
 import AssignmentTags from "./AssignmentTags.js";
+import Panel from "./Panel.js";
 
 export default {
   data() {
     return {
       currentTag: "",
+      show: true,
     };
   },
 
-  components: { Assignment, AssignmentTags },
+  components: {
+    Panel,
+    Assignment,
+    AssignmentTags,
+  },
 
   props: {
     title: String,
     assignments: Array,
+    canToggle: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   computed: {
     tags() {
-      return ["all", ...new Set(this.assignments.map((a) => a.tag))];
+      return [
+        "all",
+        ...new Set(this.assignments.map((a) => a.tag?.trim()).filter(Boolean)),
+      ];
     },
 
     filteredAssignments() {
@@ -30,24 +43,48 @@ export default {
 
   template: /* html */ `
         <!--<section v-show="assignments.length"> -->
-        <section  :class="{ invisible: !assignments.length }">
-            <h2 class="font-bold mb-2 flex justify-between">
+        <panel :class="{ invisible: canToggle && !assignments.length }" >
+            <div class="font-bold mb-2 flex justify-between">
+               <h2>
                 {{ title }}
                 <span>({{ assignments.length }})</span>
-            </h2>
+              </h2>
+
+              <button v-show="canToggle" @click="show = !show">&times;</button>
+            </div>
+           
 
             <assignment-tags 
-              :initial-tags="assignments.map(a => a.tag)" 
+              :initial-tags="tags" 
               v-model="currentTag"
             />
 
-            <ul class="border border-gray-600 rounded-2xl divide-y divide-gray-600 mt-2">
+
+            <!-- Empty state -->
+            <div
+                v-if="filteredAssignments.length === 0"
+                class="border border-gray-600 rounded-2xl mt-2 p-8 text-center text-gray-400"
+            >
+                No assignments found.
+            </div>
+
+            <!-- Assignments list -->
+            <ul 
+              v-if="filteredAssignments.length !== 0" 
+              class="border border-gray-600 rounded-2xl divide-y divide-gray-600 mt-2"
+            >
                 <assignment 
                     v-for="assignment in filteredAssignments" 
                     :assignment="assignment"
                     :key="assignment.id"
                 />
             </ul>
-        </section>
+
+                <slot />  
+
+            <template #footer>
+               my footer
+            </template>
+        </panel>
     `,
 };

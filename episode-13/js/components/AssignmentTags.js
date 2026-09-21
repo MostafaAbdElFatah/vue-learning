@@ -6,7 +6,7 @@ export default {
 
   computed: {
     tags() {
-      return ["all", ...new Set(this.initialTags)];
+      return new Set(this.initialTags.map((a) => a?.trim()).filter(Boolean));
     },
   },
 

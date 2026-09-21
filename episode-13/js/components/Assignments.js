@@ -35,17 +35,18 @@ export default {
   },
 
   template: /* html */ `
-        <section class="grid grid-cols-2 items-start space-x-10">
+        <section class="grid grid-cols-2 items-start space-x-2">
             <assignment-list 
                 title="In Progress" 
                 :assignments="filters.inProgress" 
-            /> 
+            > 
+              <assignment-create @add="add" />
+            </assignment-list>
             <assignment-list 
                 title="Completed" 
                 :assignments="filters.completed"
+                can-toggle
              /> 
         </section>
-        <assignment-create @add="add" />
-        <pre>{{ JSON.stringify(assignments, null, 2) }}</pre>
     `,
 };
