@@ -1,0 +1,22 @@
+{
+  "assignments": [
+    {
+      "id": 0,
+      "name": "Finish project",
+      "complete": false,
+      "tag": "math"
+    },
+    {
+      "id": 1,
+      "name": "Read chapter 4",
+      "complete": false,
+      "tag": "science"
+    },
+    {
+      "id": 2,
+      "name": "Turn in homework",
+      "complete": false,
+      "tag": "math"
+    }
+  ]
+}
