@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learing Vue</title>
+    <script src="https://unpkg.com/vue@3"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+
+<body class="min-h-screen grid place-items-center">
+
+    <div id="app" class="space-x-3">
+        <app-button>Submit</app-button>
+        <app-button>Clik Me</app-button>
+
+    </div>
+    <script>
+        let app = {
+
+
+            components: {
+                'app-button': {
+                    template: `
+                        <button 
+                            class="
+                                bg-gray-200 
+                                hover:bg-gray-400 
+                                rounded 
+                                px-3 py-2
+                                disabled:cursor-not-allowed
+                            "
+                            :disabled="disabled"
+                            :click="disabled = !disabled"
+                            >
+                            <slot />
+                        </button>
+                    `,
+                    data() {
+                        return {
+                            disabled: true
+                        };
+                    },
+                },
+
+
+            },
+
+
+        };
+
+
+        Vue.createApp(app).mount('#app');
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learing Vue</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="./css/loader.css">
+    <link rel="stylesheet" href="./css/loader-ring.css">
+    <link rel="stylesheet" href="./css/loader-dots.css">
+    <link rel="stylesheet" href="./css/loader-circle.css">
+    <link rel="stylesheet" href="./css/loader-roller.css">
+    <link rel="stylesheet" href="./css/loader-corner.css">
+</head>
+
+<body class="min-h-screen grid place-items-center">
+
+    <div id="app" class="space-x-3">
+        <app-button :processing="true" spinner="spinner">Submit</app-button>
+        <app-button :processing="true" spinner="ring" type="outlined">Clik Me</app-button>
+        <app-button :processing="true" spinner="dots" type="secondary">Clik Me</app-button>
+        <app-button :processing="true" spinner="circle" type="muted">Clik Me</app-button>
+        <app-button :processing="true" spinner="roller">Roller</app-button>
+        <app-button :processing="true" spinner="corner" type="secondary">Corner</app-button>
+
+    </div>
+    <script type="module">
+        import App from './js/components/App.js';
+
+        Vue.createApp(App).mount('#app');
+    </script>
+</body>
+
+</html>

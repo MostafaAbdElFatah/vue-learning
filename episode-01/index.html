@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learing Vue</title>
+    <script src="https://unpkg.com/vue@3"></script>
+    <style>
+        html,
+        body {
+            height: 100%;
+        }
+
+        body {
+            display: grid;
+            place-items: center;
+        }
+
+        button {
+            padding: 0.75rem;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .text-white {
+            color: white;
+        }
+
+        .text-red {
+            color: red;
+        }
+
+        .text-green {
+            color: green;
+        }
+
+        .bg-red {
+            background-color: red;
+        }
+
+        .bg-green {
+            background-color: green;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="app">
+        <button :class="active ? 'bg-green text-white' : 'bg-red text-white'" v-on:click="toggle" dis>Click Me</button>
+    </div>
+    <script>
+        Vue
+            .createApp({
+                data() {
+                    return {
+                        //buttenClasses: 'bg-green text-white',
+                        active: true,
+                    };
+                },
+
+                methods: {
+                    toggle() {
+                        //this.buttenClasses = 'bg-red text-white';
+                        this.active = !this.active;
+                    }
+                }
+            })
+            .mount('#app');
+    </script>
+</body>
+
+</html>

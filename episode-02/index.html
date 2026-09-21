@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learing Vue</title>
+    <script src="https://unpkg.com/vue@3"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+
+<body class="min-h-screen grid place-items-center">
+
+    <div id="app">
+        <div class="grid grid-cols-2 items-start space-x-10">
+            <section v-show="inProgressAssignments.length">
+                <h2 class="font-bold mb-2">In Progress Assignments</h2>
+
+                <ul>
+                    <li v-for="assignment in inProgressAssignments" :key="assignment.id">
+                        <label>
+                            <input type="checkbox" v-model="assignment.complete">
+                            {{ assignment.name}}
+                        </label>
+                    </li>
+                </ul>
+            </section>
+
+            <section v-if="completedAssignments.length">
+                <h2 class="font-bold mb-2">Completed Assignments</h2>
+
+                <ul>
+                    <li v-for="assignment in completedAssignments" :key="assignment.id">
+                        <label>
+                            <input type="checkbox" v-model="assignment.complete">
+                            {{ assignment.name}}
+                        </label>
+                    </li>
+                </ul>
+            </section>
+        </div>
+
+
+        <pre>{{ JSON.stringify(assignments, null, 2) }}</pre>
+    </div>
+    <script>
+        Vue
+            .createApp({
+                data() {
+                    return {
+                        assignments: [
+                            { id: 0, name: 'Finish project', complete: false },
+                            { id: 1, name: 'Read chapter 4', complete: false },
+                            { id: 2, name: 'Turn in homework', complete: false },
+                        ],
+                    };
+                },
+
+                methods: {
+
+                },
+
+                computed: {
+                    inProgressAssignments() {
+                        return this.assignments.filter(a => !a.complete);
+                    },
+                    completedAssignments() {
+                        return this.assignments.filter(a => a.complete);
+                    },
+                }
+            })
+            .mount('#app');
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,39 @@
+/* Source: https://cssloaders.github.io/
+   4-dot orbit loader — apply .loader-dots directly on the button.
+   ::after draws the outer teal dots, ::before the smaller hue-rotated inner ring. */
+.loader-dots {
+    position: relative;
+    color: transparent;
+}
+
+.loader-dots::before,
+.loader-dots::after {
+    content: '';
+    position: absolute;
+    top: calc(50% - 12px);
+    left: calc(50% - 12px);
+    width: 24px;
+    height: 24px;
+    --c: no-repeat radial-gradient(farthest-side, #25b09b 92%, #0000);
+    background:
+        var(--c) 50% 0,
+        var(--c) 50% 100%,
+        var(--c) 100% 50%,
+        var(--c) 0 50%;
+    background-size: 6px 6px;
+    animation: dots-rotate 1s infinite;
+}
+
+.loader-dots::before {
+    top: calc(50% - 10px);
+    left: calc(50% - 10px);
+    width: 20px;
+    height: 20px;
+    filter: hue-rotate(45deg);
+    background-size: 4px 4px;
+    animation-timing-function: linear;
+}
+
+@keyframes dots-rotate {
+    100% { transform: rotate(.5turn); }
+}
